@@ -10,10 +10,15 @@ https://play.google.com/store/apps/details?id=com.mindboardapps.app.smallsketch
 ## Usage
 
 1. Build small-sketch-to-svg.zip
+
     Do `./gradlew distZip` and build/distributions/small-sketch-to-svg.zip is generated.
+
 2. Install small-sketch-to-svg command 
+
     Unzip small-sketch-to-svg.zip in somewhere you want
+
 3. Convert ssf to svg
+
     DO `cat foo.ssf | /path/to/small-sketch-to-svg > foo.svg`
 
 There is example file tree.ssf in the ./examples dir.
