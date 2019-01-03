@@ -3,8 +3,9 @@
 
 Convert SSF (small sketch format) to SVG at the command line.
 
-Small Sketch :
-https://play.google.com/store/apps/details?id=com.mindboardapps.app.smallsketch
+You can create SSF data with these tools:  
+* Coto Paper :  https://play.google.com/store/apps/details?id=com.mindboardapps.app.cotopaper
+* Small Sketch : https://play.google.com/store/apps/details?id=com.mindboardapps.app.smallsketch
 
 
 ## Usage
