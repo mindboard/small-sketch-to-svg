@@ -21,7 +21,7 @@ You can create SSF data with these tools:
 
 There is example file tree.ssf in the ./examples dir.
 If you want customize svg style such as background color and stroke color etc, use ./examples/style.json.
-In order to apply style.json file:
+In order to apply style.json file, use -s option:
 
 ```
 cat examples/tree.ssf | /path/to/small-sketch-to-svg -s examples/style.json > tree.svg
