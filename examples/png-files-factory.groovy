@@ -13,7 +13,7 @@ import org.apache.batik.transcoder.image.PNGTranscoder
 import java.util.zip.GZIPInputStream
 import com.mindboardapps.app.smallsketch.tosvg.*
 import com.mindboardapps.app.smallsketch.tosvg.style.DefaultStyleObject
-import com.mindboardapps.app.smallsketch.tosvg.style.StyleObject
+//import com.mindboardapps.app.smallsketch.tosvg.style.StyleObject
 
 import javax.imageio.ImageIO
 import java.awt.image.BufferedImage
@@ -53,7 +53,8 @@ def createBaseImage = { widthAndHeight->
 }
 
 
-def styleObject = new StyleObject(new File('style.json'))
+//def styleObject = new StyleObject(new File('style.json'))
+def styleObject = new DefaultStyleObject()
 def ssfToSvg = new SsfToSvg(styleObject)
 
 
