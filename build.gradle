@@ -17,6 +17,8 @@ plugins {
 apply plugin: 'kotlin'
 apply plugin: 'groovy'
 apply plugin: 'application'
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
 
 mainClassName = 'com.mindboardapps.app.smallsketch.tosvg.MainKt'
 
@@ -32,4 +34,20 @@ dependencies {
     testCompile 'org.codehaus.groovy:groovy:2.4.16'
     testCompile 'org.spockframework:spock-core:1.2-groovy-2.4'
     testCompile 'junit:junit:4.12'
+}
+
+
+jar.baseName = 'small-sketch-to-svg'
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId 'com.mindboardapps.app.smallsketch'
+            artifactId 'to-svg'
+            version '0.1.0-SNAPSHOT'
+
+            from components.java
+        }
+    }
 }
