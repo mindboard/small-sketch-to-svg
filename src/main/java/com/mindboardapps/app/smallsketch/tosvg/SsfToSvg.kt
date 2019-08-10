@@ -12,6 +12,10 @@ import com.mindboardapps.app.smallsketch.tosvg.utils.Matrix
 import com.mindboardapps.app.smallsketch.tosvg.utils.MatrixUtils
 
 class SsfToSvg(private val styleObject: IStyleObject) {
+    companion object {
+        private val DEFAULT_PADDING_FACTOR = 0.9f
+    }
+
     val strokeWidth = styleObject.strokeWidth
 
     fun createSvg(lines: List<String>): String {
@@ -53,19 +57,24 @@ class SsfToSvg(private val styleObject: IStyleObject) {
                 canvasHeight.toInt() )
         }
 
-
-        val translationMatrixValues = floatArrayOf(
-            1f, 0f, (0f - minLeft),
-            0f, 1f, (0f - minTop),
+        val translationMatrixValues0 = floatArrayOf(
+            1f, 0f, (0f - minLeft) - canvasWidth/2f,
+            0f, 1f, (0f - minTop)  - canvasHeight/2f,
             0f, 0f, 1f)
 
+        var paddingFactor = if( styleObject.hasPadding ){ DEFAULT_PADDING_FACTOR } else { 1f }
         val scaleMatrixValues = floatArrayOf(
-            scale, 0f, 0f,
-            0f, scale, 0f,
+            scale * paddingFactor , 0f, 0f,
+            0f, scale * paddingFactor, 0f,
             0f, 0f, 1f)
 
-        // translation -> scale 
-        val matrixValues = MatrixUtils.times(scaleMatrixValues, translationMatrixValues)
+        val translationMatrixValues1 = floatArrayOf(
+            1f, 0f, canvasWidth*scale/2f,
+            0f, 1f, canvasHeight*scale/2f,
+            0f, 0f, 1f)
+
+        val matrixValues = MatrixUtils.times(translationMatrixValues1, scaleMatrixValues, translationMatrixValues0)
+
 
         val matrix = Matrix()
         matrix.setValues( matrixValues )

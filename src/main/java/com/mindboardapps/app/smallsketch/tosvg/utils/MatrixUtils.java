@@ -23,4 +23,8 @@ public class MatrixUtils {
             matrixA[0+3*2]*matrixB[2] + matrixA[1+3*2]*matrixB[5] + matrixA[2+3*2]*matrixB[8]
         };
     }
+
+    public static float[] times( float[] matrixA, float[] matrixB, float[] matrixC ){
+        return times( times( matrixA,matrixB ), matrixC );
+    }
 }
