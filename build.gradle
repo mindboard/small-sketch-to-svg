@@ -51,3 +51,8 @@ publishing {
         }
     }
 }
+
+
+clean.doFirst {
+    new File('.').listFiles( {it.name.endsWith('svg')} as FileFilter ).each { it.delete() }
+}

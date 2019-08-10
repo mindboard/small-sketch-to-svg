@@ -22,6 +22,7 @@ class CmdLoader(private val db: IDb) {
             CmdName.ADD_STROKE.name     -> processAddStroke(contentsJsonObject)
             CmdName.DELETE_STROKES.name -> processDeleteStrokes(contentsJsonObject)
             CmdName.MOVE_STROKES.name   -> processMoveStrokes(contentsJsonObject)
+            CmdName.RESIZE_GROUP.name   -> processResizeGroup(contentsJsonObject)
         }
     }
 
@@ -31,11 +32,7 @@ class CmdLoader(private val db: IDb) {
         val groupUuid = contentsJsonObject.getString("groupUuid")
         val ptsArray = contentsJsonObject.getJSONArray("pts")
 
-        val pts0 = arrayListOf<Float>()
-        0.until(ptsArray.length()).forEach { index ->
-            pts0.add(ptsArray.getDouble(index).toFloat())
-        }
-
+        val pts0 = 0.until(ptsArray.length()).map { ptsArray.getDouble(it).toFloat() }
         val pts1 = pts0.toFloatArray()
 
         if (pts1.isNotEmpty()) {
@@ -54,10 +51,7 @@ class CmdLoader(private val db: IDb) {
 
     private fun processDeleteStrokes(contentsJsonObject: JSONObject){
         val uuidArray = contentsJsonObject.getJSONArray("uuids")
-        val uuids = arrayListOf<String>()
-        0.until(uuidArray.length()).forEach { index ->
-            uuids.add(uuidArray.getString(index))
-        }
+        val uuids = 0.until(uuidArray.length()).map { uuidArray.getString(it) }
 
         if (uuids.isNotEmpty()) {
             val action = DeleteStrokesActionWhenLoad(db, uuids)
@@ -67,17 +61,10 @@ class CmdLoader(private val db: IDb) {
 
     private fun processMoveStrokes(contentsJsonObject: JSONObject){
         val ptsArray = contentsJsonObject.getJSONArray("pts")
-        val pts0 = arrayListOf<Float>()
-        0.until(ptsArray.length()).forEach {index->
-            pts0.add(ptsArray.getDouble(index).toFloat())
-        }
+        val pts0 = 0.until(ptsArray.length()).map { ptsArray.getDouble(it).toFloat() }
 
         val uuidArray = contentsJsonObject.getJSONArray("uuids")
-
-        val uuids = arrayListOf<String>()
-        0.until(uuidArray.length()).forEach { index ->
-            uuids.add(uuidArray.getString(index))
-        }
+        val uuids = 0.until(uuidArray.length()).map { uuidArray.getString(it) }
 
         if (uuids.isNotEmpty()) {
             val pts1 = pts0.toFloatArray()
@@ -97,5 +84,21 @@ class CmdLoader(private val db: IDb) {
             }
         }
     }
-}
 
+    private fun processResizeGroup(contentsJsonObject: JSONObject){
+        val scaleX = contentsJsonObject.getDouble("scaleX").toFloat()
+        val scaleY = contentsJsonObject.getDouble("scaleY").toFloat()
+
+        val strokeUuidArray = contentsJsonObject.getJSONArray("strokeUuids")
+        val uuids = 0.until(strokeUuidArray.length()).map { strokeUuidArray.getString(it) }
+
+        if( uuids.size>0 ){
+            val action = GroupResizeActionWhenLoad(
+                db,
+                uuids,
+                scaleX,
+                scaleY)
+            action.exec()
+        }
+    }
+}

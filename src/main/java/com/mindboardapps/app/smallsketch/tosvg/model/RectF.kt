@@ -24,4 +24,12 @@ class RectF(){
         right = bounds?.right ?: 0f
         bottom = bounds?.bottom ?: 0f
     }
+
+    fun width(): Float{
+        return (right - left)
+    }
+
+    fun height(): Float{
+        return (bottom - top)
+    }
 }

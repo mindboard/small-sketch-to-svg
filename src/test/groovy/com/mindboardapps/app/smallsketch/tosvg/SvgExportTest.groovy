@@ -1,22 +1,47 @@
 package com.mindboardapps.app.smallsketch.tosvg
 
 import spock.lang.Specification
+import spock.lang.Ignore
 import java.util.zip.GZIPInputStream
 import com.mindboardapps.app.smallsketch.tosvg.style.*
 
 class SvgExportTest extends Specification {
-    def "export-as-svg-test"(){
+    private static void toSvg(
+        File styleJsonFile,
+        File ssfFile,
+        File svgFile){
+
+        def lines = new GZIPInputStream(new FileInputStream(ssfFile)).readLines()
+        svgFile.text = new SsfToSvg( new StyleObject( styleJsonFile ) ).createSvg(lines)
+    }
+
+    //@Ignore
+    def "export-as-svg-test-2"(){
         when:
         def styleJsonFile = new File('./examples/style.json')
-        def styleObject = new StyleObject( styleJsonFile )
+        def svgFile = new File('nuc.svg')
 
-        def treeSsfFile = new File('./examples/tree.ssf')
-        def treeSvgFile = new File('tree.svg')
-
-        def lines = new GZIPInputStream(new FileInputStream(treeSsfFile)).readLines()
-        treeSvgFile.text = new SsfToSvg(styleObject).createSvg(lines)
+        toSvg(
+            styleJsonFile, 
+            new File('./examples/nuc.ssf'),
+            svgFile)
 
         then:
-        treeSvgFile.exists()
+        svgFile.exists()
+    }
+
+    //@Ignore
+    def "export-as-svg-test-1"(){
+        when:
+        def styleJsonFile = new File('./examples/style.json')
+        def svgFile = new File('tree.svg')
+
+        toSvg(
+            styleJsonFile, 
+            new File('./examples/tree.ssf'),
+            svgFile)
+
+        then:
+        svgFile.exists()
     }
 }
