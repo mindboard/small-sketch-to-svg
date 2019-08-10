@@ -26,7 +26,7 @@ In order to apply style.json file, use -s option:
 cat examples/tree.ssf | /path/to/small-sketch-to-svg -s examples/style.json > tree.svg
 ```
 
-![Example Tree Images](https://github.com/mindboard/small-sketch-to-svg/blob/master/examples/tree.svg)
+![Example1](https://github.com/mindboard/small-sketch-to-svg/blob/master/resources/example1.svg)
 
 
 ## License
