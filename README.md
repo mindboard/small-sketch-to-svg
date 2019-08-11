@@ -18,13 +18,14 @@ SSF is small-sketch-format.
 3. Convert ssf to svg  
     `cat foo.ssf | /path/to/small-sketch-to-svg/bin/small-sketch-to-svg > foo.svg`
 
-There is an example file example1.ssf in the ./resources dir.
-If you want customize svg style such as background color and stroke color etc, use ./examples/style.json.
-In order to apply style.json file, use -s option:
+4. Convert ssf to svg with style
+    `cat foo.ssf | /path/to/small-sketch-to-svg/bin/small-sketch-to-svg -s style.json > foo.svg`
 
-```
-cat resources/example1.ssf | /path/to/small-sketch-to-svg -s examples/style.json > example1.svg
-```
+5. Convert ssf to png with style
+    `cat foo.ssf | /path/to/small-sketch-to-svg/bin/small-sketch-to-svg -f png -s style.json > foo.png`
+
+There is an example file example1.ssf in the ./resources dir.
+And a style.json example in the ./examples dir.
 
 ![Example1](https://github.com/mindboard/small-sketch-to-svg/blob/master/resources/example1.svg)
 

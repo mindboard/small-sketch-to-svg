@@ -13,31 +13,17 @@ fun main(args : Array<String>) {
 
     val cl = DefaultParser().parse(options, args)
 
-    if ( cl.hasOption("-s") ){
-        // -----------------------------------
-        // A) the case with style json
-        // -----------------------------------
-        val styleJsonFilePath = cl.getOptionValue("s")
-        val styleJsonFile = File(styleJsonFilePath)
+    val outputFormat = if( !cl.hasOption("-f") ){ "svg" } else { cl.getOptionValue("f")!! }
+    val styleObject  = if( !cl.hasOption("-s") ){ DefaultStyleObject() } else { StyleObject(File( cl.getOptionValue("s")!!)) }
 
-        val styleObject = StyleObject( styleJsonFile )
-        val lines = GZIPInputStream(System.`in`).bufferedReader(Charsets.UTF_8).use {
-            it.readLines()
-        }
+    val lines = GZIPInputStream(System.`in`).bufferedReader(Charsets.UTF_8).use { it.readLines() }
 
-        if( !cl.hasOption("-f") ){
-            print( SsfToSvg(styleObject).createSvg(lines) )
-        }
-        else {
-            val outputFormat = cl.getOptionValue("f")
-            if( outputFormat=="svg" ){
-                print( SsfToSvg(styleObject).createSvg(lines) )
-            }
-            if( outputFormat=="png" ){
-                val outputStream = BufferedOutputStream(System.out)
-                SsfToPng(styleObject).createPng(lines, outputStream)
-                outputStream.close()
-            }
-        }
+    if( outputFormat=="svg" ){
+        print( SsfToSvg(styleObject).createSvg(lines) )
+    }
+    if( outputFormat=="png" ){
+        val outputStream = BufferedOutputStream(System.out)
+        SsfToPng(styleObject).createPng(lines, outputStream)
+        outputStream.close()
     }
 }
