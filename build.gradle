@@ -30,6 +30,8 @@ dependencies {
     compile 'org.jetbrains.kotlin:kotlin-stdlib'
     compile 'org.json:json:20180813'
     compile 'commons-cli:commons-cli:1.4'
+    compile 'batik:batik-transcoder:1.6-1'
+    compile 'batik:batik-xml:1.6-1'
 
     testCompile 'org.codehaus.groovy:groovy:2.4.16'
     testCompile 'org.spockframework:spock-core:1.2-groovy-2.4'
@@ -55,4 +57,5 @@ publishing {
 
 clean.doFirst {
     new File('.').listFiles( {it.name.endsWith('svg')} as FileFilter ).each { it.delete() }
+    new File('.').listFiles( {it.name.endsWith('png')} as FileFilter ).each { it.delete() }
 }

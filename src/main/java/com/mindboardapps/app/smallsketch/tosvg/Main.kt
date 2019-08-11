@@ -8,7 +8,9 @@ import com.mindboardapps.app.smallsketch.tosvg.style.*
 
 fun main(args : Array<String>) {
     val options = Options()
-    options.addOption("s", "style", true, "Specify style json file")
+    options.addOption("s", "style", true, "Specify style json filepath")
+    options.addOption("f", "format", true, "Specify output file format")
+
     val cl = DefaultParser().parse(options, args)
 
     if ( cl.hasOption("-s") ){
@@ -22,30 +24,19 @@ fun main(args : Array<String>) {
         val lines = GZIPInputStream(System.`in`).bufferedReader(Charsets.UTF_8).use {
             it.readLines()
         }
-        print( SsfToSvg(styleObject).createSvg(lines) )
-    }
-    else {
-        // -----------------------------------
-        // B) the case without style json
-        // -----------------------------------
-        val styleObject = DefaultStyleObject()
 
-        if( args.size<1 ){
-            val lines = GZIPInputStream(System.`in`).bufferedReader(Charsets.UTF_8).use {
-                it.readLines()
-            }
-    
+        if( !cl.hasOption("-f") ){
             print( SsfToSvg(styleObject).createSvg(lines) )
         }
-        else if( args.size>1 ){
-            val ssfFile = File(args[0])
-            val svgFile = File(args[1])
-
-            if( ssfFile.exists() && ssfFile.name.endsWith("ssf") ){
-                val lines = GZIPInputStream(FileInputStream(ssfFile)).bufferedReader(Charsets.UTF_8).use { it.readLines() }
-    
-                val svgText = SsfToSvg(styleObject).createSvg(lines)
-                svgFile.bufferedWriter(Charsets.UTF_8).use { it.write(svgText) }
+        else {
+            val outputFormat = cl.getOptionValue("f")
+            if( outputFormat=="svg" ){
+                print( SsfToSvg(styleObject).createSvg(lines) )
+            }
+            if( outputFormat=="png" ){
+                val outputStream = BufferedOutputStream(System.out)
+                SsfToPng(styleObject).createPng(lines, outputStream)
+                outputStream.close()
             }
         }
     }
