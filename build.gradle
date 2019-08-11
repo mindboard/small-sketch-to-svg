@@ -39,14 +39,14 @@ dependencies {
 }
 
 
-jar.baseName = 'small-sketch-to-svg'
+jar.baseName = 'ssf2img'
 
 
 publishing {
     publications {
         maven(MavenPublication) {
             groupId 'com.mindboardapps.app.smallsketch'
-            artifactId 'to-svg'
+            artifactId 'to-img'
             version '0.1.0-SNAPSHOT'
 
             from components.java

@@ -8,25 +8,24 @@ CLI tool to convert SSF(small-sketch-format) into SVG, PNG format.
 
 ## Usage
 
-1. Build small-sketch-to-svg.zip  
-    `./gradlew distZip` and build/distributions/small-sketch-to-svg.zip is generated.
+1. Build ssf2img.zip  
+    `./gradlew distZip` and build/distributions/ssf2img.zip is generated.
 
-2. Install small-sketch-to-svg command  
-    Unzip small-sketch-to-svg.zip in somewhere you want
+2. Install ssf2img command  
+    Unzip ssf2img.zip in somewhere you want
 
 3. Convert ssf to svg  
-    `cat foo.ssf | /path/to/small-sketch-to-svg/bin/small-sketch-to-svg > foo.svg`
+    `cat foo.ssf | /path/to/ssf2img/bin/ssf2img > foo.svg`
 
 4. Convert ssf to svg with style
-    `cat foo.ssf | /path/to/small-sketch-to-svg/bin/small-sketch-to-svg -s style.json > foo.svg`
+    `cat foo.ssf | /path/to/ssf2img/bin/ssf2img -s style.json > foo.svg`
 
 5. Convert ssf to png with style
-    `cat foo.ssf | /path/to/small-sketch-to-svg/bin/small-sketch-to-svg -f png -s style.json > foo.png`
+    `cat foo.ssf | /path/to/ssf2img/bin/ssf2img -f png -s style.json > foo.png`
 
-There is an example file example1.ssf in the ./resources dir.
-And a style.json example in the ./examples dir.
+There is an example file example1.ssf in the ./resources dir and a style.json example in the ./examples dir.
 
-![Example1](https://github.com/mindboard/small-sketch-to-svg/blob/master/resources/example1.svg)
+![Example1](https://github.com/mindboard/ssf2img/blob/master/resources/example1.svg)
 
 
 ## License
