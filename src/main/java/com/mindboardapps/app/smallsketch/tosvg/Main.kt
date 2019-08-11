@@ -7,6 +7,7 @@ import org.json.*
 import com.mindboardapps.app.smallsketch.tosvg.style.*
 
 fun main(args : Array<String>) {
+    System.setProperty("java.awt.headless", "true")
     val options = Options()
     options.addOption("s", "style", true, "Specify style json filepath")
     options.addOption("f", "format", true, "Specify output file format")
