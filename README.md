@@ -1,8 +1,7 @@
 
-# small-sketch-to-svg
+# ssf2img
 
-This is a tool in order to convert SSF to SVG.
-SSF is small-sketch-format.
+CLI tool to convert SSF(small-sketch-format) into SVG, PNG format.
 
 * Small Sketch : https://play.google.com/store/apps/details?id=com.mindboardapps.app.smallsketch
 
