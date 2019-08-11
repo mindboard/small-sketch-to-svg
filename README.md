@@ -30,4 +30,5 @@ cat resources/example1.ssf | /path/to/small-sketch-to-svg -s examples/style.json
 
 
 ## License
-MIT
+
+See the LICENSE file for license rights and limitations (MIT).
