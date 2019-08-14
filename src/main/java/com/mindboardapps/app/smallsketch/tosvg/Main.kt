@@ -32,7 +32,7 @@ fun main(args : Array<String>) {
         SsfToPng(styleObject).createImage(lines, outputStream)
         outputStream.close()
     }
-    if( listOf("jpeg","jpeg").contains(outputFormat) ){
+    if( listOf("jpg","jpeg").contains(outputFormat) ){
         val outputStream = BufferedOutputStream(System.out)
         SsfToJpeg(styleObject).createImage(lines, outputStream)
         outputStream.close()
