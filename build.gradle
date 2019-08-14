@@ -61,4 +61,5 @@ publishing {
 clean.doFirst {
     new File('.').listFiles( {it.name.endsWith('svg')} as FileFilter ).each { it.delete() }
     new File('.').listFiles( {it.name.endsWith('png')} as FileFilter ).each { it.delete() }
+    new File('.').listFiles( {it.name.endsWith('jpg')} as FileFilter ).each { it.delete() }
 }
