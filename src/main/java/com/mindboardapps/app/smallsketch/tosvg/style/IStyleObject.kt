@@ -8,9 +8,11 @@ interface IStyleObject {
 
     var hasPadding: Boolean
 
+    var fillBackground: Boolean
+    var backgroundColor: Color
+
     var strokeWidth: Float
     var strokeColor: Color
-    var backgroundColor: Color
     var canvasWidth: Int?
 
      fun enabledCanvasWidth(): Boolean

@@ -8,6 +8,7 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
     override var border: Boolean = false
     override var borderColor: Color = StyleObjectRes.BLACK
     override var hasPadding: Boolean = false
+    override var fillBackground: Boolean = false
     override var strokeWidth: Float = 1.0f
     override var strokeColor: Color = StyleObjectRes.BLACK
     override var backgroundColor: Color = StyleObjectRes.WHITE
@@ -31,10 +32,17 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
                 this.hasPadding = false
             }
 
-            this.strokeWidth = jsonObject.getDouble("strokeWidth").toFloat()
-            this.strokeColor = StyleObjectRes.createColor( jsonObject.getJSONObject("strokeColor"), StyleObjectRes.BLACK )
+            try {
+                this.fillBackground = jsonObject.getBoolean("fillBackground")
+            }
+            catch( ex:JSONException ){
+                this.fillBackground = false
+            }
 
             this.backgroundColor = StyleObjectRes.createColor( jsonObject.getJSONObject("backgroundColor"), StyleObjectRes.WHITE )
+
+            this.strokeWidth = jsonObject.getDouble("strokeWidth").toFloat()
+            this.strokeColor = StyleObjectRes.createColor( jsonObject.getJSONObject("strokeColor"), StyleObjectRes.BLACK )
 
             this.canvasWidth = jsonObject.getInt("canvasWidth")
         }

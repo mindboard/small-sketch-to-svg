@@ -10,9 +10,11 @@ class DefaultStyleObject : IStyleObject{
 
     override var hasPadding: Boolean = false
 
+    override var fillBackground: Boolean = false
+    override var backgroundColor: Color = StyleObjectRes.WHITE
+
     override var strokeWidth: Float = 1.0f
     override var strokeColor: Color = StyleObjectRes.BLACK
-    override var backgroundColor: Color = StyleObjectRes.WHITE
     override var canvasWidth: Int? = null
 
     override fun enabledCanvasWidth(): Boolean = false

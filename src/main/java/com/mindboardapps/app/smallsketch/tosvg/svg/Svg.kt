@@ -43,17 +43,17 @@ class Svg(
                 sb.append(createViewBox(viewBoxRect))
                 sb.append(">")
         
+                val backgroundFillColor = if( styleObject.fillBackground ){ SvgRes.createRgbColor(styleObject.backgroundColor) } else { "none" }
+
                 if( styleObject.border ){
                     val borderStrokeColor   = SvgRes.createRgbColor(styleObject.borderColor)
-                    val backgroundFillColor = SvgRes.createRgbColor(styleObject.backgroundColor)
-
                     sb.append("<g style=\"stroke:$borderStrokeColor\" stroke-width=\"1\" fill=\"$backgroundFillColor\">")
                     sb.append("<rect x=\"${viewBoxRect.x}\" y=\"${viewBoxRect.y}\" width=\"${viewBoxRect.width}\" height=\"${viewBoxRect.height}\"/>")
                     sb.append("</g>")
                 }
                 else {
-                    val color = SvgRes.createRgbColor(styleObject.backgroundColor)
-                    sb.append("<g style=\"stroke:$color\" stroke-width=\"0\" fill=\"$color\">")
+                    val borderStrokeColor = SvgRes.createRgbColor(styleObject.backgroundColor)
+                    sb.append("<g style=\"stroke:$borderStrokeColor\" stroke-width=\"0\" fill=\"$backgroundFillColor\">")
                     sb.append("<rect x=\"${viewBoxRect.x}\" y=\"${viewBoxRect.y}\" width=\"${viewBoxRect.width}\" height=\"${viewBoxRect.height}\"/>")
                     sb.append("</g>")
                 }
