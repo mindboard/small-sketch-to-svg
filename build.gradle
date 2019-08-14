@@ -35,6 +35,7 @@ dependencies {
     compile 'org.apache.xmlgraphics:batik-transcoder:1.11'
     compile 'org.apache.xmlgraphics:batik-xml:1.11'
     compile 'org.apache.xmlgraphics:batik-codec:1.11'
+    compile 'org.apache.xmlgraphics:fop:2.3'
 
     testCompile 'org.codehaus.groovy:groovy:2.4.16'
     testCompile 'org.spockframework:spock-core:1.2-groovy-2.4'
@@ -62,4 +63,5 @@ clean.doFirst {
     new File('.').listFiles( {it.name.endsWith('svg')} as FileFilter ).each { it.delete() }
     new File('.').listFiles( {it.name.endsWith('png')} as FileFilter ).each { it.delete() }
     new File('.').listFiles( {it.name.endsWith('jpg')} as FileFilter ).each { it.delete() }
+    new File('.').listFiles( {it.name.endsWith('pdf')} as FileFilter ).each { it.delete() }
 }
