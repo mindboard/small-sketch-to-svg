@@ -14,7 +14,7 @@ fun main(args : Array<String>) {
 
     val cl = DefaultParser().parse(options, args)
 
-    val outputFormat = if( !cl.hasOption("-f") ){ "svg" } else { cl.getOptionValue("f")!! }
+    val outputFormat = if( !cl.hasOption("-f") ){ "svg" } else { cl.getOptionValue("f")!! }.toLowerCase()
     val styleObject  = if( !cl.hasOption("-s") ){ DefaultStyleObject() } else { StyleObject(File( cl.getOptionValue("s")!!)) }
 
     val lines = GZIPInputStream(System.`in`).bufferedReader(Charsets.UTF_8).use { it.readLines() }
@@ -24,7 +24,12 @@ fun main(args : Array<String>) {
     }
     if( outputFormat=="png" ){
         val outputStream = BufferedOutputStream(System.out)
-        SsfToPng(styleObject).createPng(lines, outputStream)
+        SsfToPng(styleObject).createImage(lines, outputStream)
+        outputStream.close()
+    }
+    if( listOf("jpeg","jpeg").contains(outputFormat) ){
+        val outputStream = BufferedOutputStream(System.out)
+        SsfToJpeg(styleObject).createImage(lines, outputStream)
         outputStream.close()
     }
 }

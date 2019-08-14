@@ -5,45 +5,45 @@ import spock.lang.Ignore
 import java.util.zip.GZIPInputStream
 import com.mindboardapps.app.smallsketch.tosvg.style.*
 
-class PngExportTest extends Specification {
-    private static void toPng(
+class JpegExportTest extends Specification {
+    private static void toJpeg(
         File styleJsonFile,
         File ssfFile,
-        File pngFile){
+        File jpegFile){
 
         def lines = new GZIPInputStream(new FileInputStream(ssfFile)).readLines()
-        def outputStream = new FileOutputStream(pngFile)
-        new SsfToPng( new StyleObject( styleJsonFile ) ).createImage(lines, outputStream)
+        def outputStream = new FileOutputStream(jpegFile)
+        new SsfToJpeg( new StyleObject( styleJsonFile ) ).createImage(lines, outputStream)
         outputStream.close()
     }
 
     //@Ignore
-    def "export-as-png-test-2"(){
+    def "export-as-jpg-test-2"(){
         when:
         def styleJsonFile = new File('./examples/style.json')
-        def pngFile = new File('nuc.png')
+        def jpegFile = new File('nuc.jpg')
 
-        toPng(
+        toJpeg(
             styleJsonFile, 
             new File('./examples/nuc.ssf'),
-            pngFile)
+            jpegFile)
 
         then:
-        pngFile.exists()
+        jpegFile.exists()
     }
 
     //@Ignore
-    def "export-as-png-test-1"(){
+    def "export-as-jpg-test-1"(){
         when:
         def styleJsonFile = new File('./examples/style.json')
-        def pngFile = new File('tree.png')
+        def jpegFile = new File('tree.jpg')
 
-        toPng(
+        toJpeg(
             styleJsonFile, 
             new File('./examples/tree.ssf'),
-            pngFile)
+            jpegFile)
 
         then:
-        pngFile.exists()
+        jpegFile.exists()
     }
 }
