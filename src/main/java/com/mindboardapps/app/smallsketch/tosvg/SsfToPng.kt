@@ -6,9 +6,9 @@ import java.util.zip.GZIPInputStream
 
 import org.apache.batik.transcoder.TranscoderInput
 import org.apache.batik.transcoder.TranscoderOutput
-import org.apache.batik.transcoder.image.PNGTranscoder
 
 import com.mindboardapps.app.smallsketch.tosvg.style.IStyleObject
+import com.mindboardapps.app.smallsketch.tosvg.image.*
 
 class SsfToPng(private val styleObject: IStyleObject){
     companion object {
@@ -16,7 +16,8 @@ class SsfToPng(private val styleObject: IStyleObject){
             val uri = svgFile.toURI()
             val input = TranscoderInput(uri.toString())
             val output = TranscoderOutput(outputStream)
-            PNGTranscoder().transcode(input, output)
+
+            MyPNGTranscoder().transcode(input, output)
         }
     }
 

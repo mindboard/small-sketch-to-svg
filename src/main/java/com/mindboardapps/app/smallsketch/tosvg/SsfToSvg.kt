@@ -85,16 +85,26 @@ class SsfToSvg(private val styleObject: IStyleObject) {
             val pts = it.pts
             
             val len = pts.size
+
             if( len>3 ){
                 matrix.mapPoints( pts )
-                val ptList = arrayListOf<Point>()
-                0.until(len).step(2).forEach { index->
-                    val x = pts[index]
-                    val y = pts[index+1]
-                    ptList.add( Point(x,y) )
-                }
 
-                svgPartList.add( SvgLine2(styleObject, ptList) )
+                // In rendering quality, A is better than B.
+
+                // A) Simple
+                val ptList = 0.until(len).step(2).map { Point(pts[it],pts[it+1]) }
+                svgPartList.add( SvgSmoothLine(styleObject, ptList) )
+
+                /*
+                // B) Smooth
+                val ptList = 0.until(len).step(2).map { Point(pts[it],pts[it+1]) }
+                if( len<8 ){
+                    svgPartList.add( SvgLine2(styleObject, ptList) )
+                }
+                else {
+                    svgPartList.add( SvgSmoothLine(styleObject, ptList) )
+                }
+                */
             }
         }
 
