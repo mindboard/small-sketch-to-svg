@@ -18,7 +18,7 @@ CLI tool to convert SSF(small-sketch-format) into SVG, PDF, PNG, JPEG format.
     `cat foo.ssf | /path/to/ssf2img/bin/ssf2img > foo.png`
 
 4. Convert ssf to png with style  
-    `cat foo.ssf | /path/to/ssf2img/bin/ssf2img -s style.json > foo.png`
+    `cat foo.ssf | /path/to/ssf2img/bin/ssf2img -s style.json > foo.png`  
     _There are example style files in this project examples dir._
 
 5. Convert ssf to svg with style  
