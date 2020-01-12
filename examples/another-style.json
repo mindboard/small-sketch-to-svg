@@ -1,0 +1,9 @@
+{
+	"border": true,
+	"hasPadding": true,
+	"borderColor": {"R":27, "G":95, "B":133 },
+	"strokeWidth" : 1.2,
+	"strokeColor" : {"R":27, "G":95, "B":133 },
+	"backgroundColor" : {"R":253, "G":246, "B":227 },
+	"canvasWidth" : 480
+}
