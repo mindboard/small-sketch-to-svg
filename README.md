@@ -1,7 +1,7 @@
 
 # ssf2img
 
-CLI tool to convert SSF(small-sketch-format) into SVG, PDF, PNG, JPEG format.
+A command line tool to convert SSF(small-sketch-format) into SVG, PDF, PNG, JPEG format.
 
 * Small Sketch : https://play.google.com/store/apps/details?id=com.mindboardapps.app.smallsketch
 
