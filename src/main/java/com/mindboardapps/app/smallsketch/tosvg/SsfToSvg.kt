@@ -5,7 +5,6 @@ import java.util.zip.GZIPInputStream
 
 import org.json.*
 
-import com.mindboardapps.app.smallsketch.tosvg.db.*
 import com.mindboardapps.app.smallsketch.tosvg.svg.*
 import com.mindboardapps.app.smallsketch.tosvg.style.*
 import com.mindboardapps.app.smallsketch.tosvg.utils.Matrix
@@ -19,23 +18,13 @@ class SsfToSvg(private val styleObject: IStyleObject) {
     val strokeWidth = styleObject.strokeWidth
 
     fun createSvg(lines: List<String>): String {
-        val db = Db()
+        val strokeObjectList = CmdHelper.toStrokeObjectList(lines)
+        val canvasRectF = CmdHelper.toCanvasRectF(strokeObjectList)
 
-        val cmdLoader = CmdLoader(db)
-        lines.forEach { line->
-            val jsonObject = JSONObject(line)
-            cmdLoader.process( jsonObject )
-        }
-
-        val strokeObjectList = db.strokeObjectList()
-
-        val minLeft   = strokeObjectList.map { it.getBounds().left }.reduce { item0, item1-> Math.min(item0,item1) }
-        val maxRight  = strokeObjectList.map { it.getBounds().right }.reduce { item0, item1-> Math.max(item0,item1) }
-        val minTop    = strokeObjectList.map { it.getBounds().top }.reduce { item0, item1-> Math.min(item0,item1) }
-        val maxBottom = strokeObjectList.map { it.getBounds().bottom }.reduce { item0, item1-> Math.max(item0,item1) }
-
-        val canvasWidth  = (maxRight - minLeft)
-        val canvasHeight = (maxBottom - minTop)
+        val minLeft = canvasRectF.left
+        val minTop  = canvasRectF.top
+        val canvasWidth  = canvasRectF.width
+        val canvasHeight = canvasRectF.height
 
         val scale = if( styleObject.enabledCanvasWidth() ){
             styleObject.canvasWidth!!.toFloat() / canvasWidth

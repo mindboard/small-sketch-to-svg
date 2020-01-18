@@ -27,7 +27,7 @@ class CmdLoaderTest extends Specification {
     }
     
     //@Ignore
-    def "stroke-object-list-size"(){
+    def "stroke-object-list-size-test"(){
         when:
         def strokeObjectList = toStrokeObject( getLines() )
 
@@ -36,7 +36,7 @@ class CmdLoaderTest extends Specification {
     }
 
     //@Ignore
-    def "canavs-params"(){
+    def "canavs-params-test"(){
         when:
         def strokeObjectList = toStrokeObject( getLines() )
 
@@ -50,5 +50,21 @@ class CmdLoaderTest extends Specification {
         minTop == -541.86035f
         maxRight == 296.5984f
         maxBottom == 207.61145f
+    }
+
+    //@Ignore
+    def "cmd-helper-test"(){
+        when:
+        def strokeObjectListA = toStrokeObject( getLines() )
+        def strokeObjectListB = CmdHelper.INSTANCE.toStrokeObjectList(getLines())
+
+        def canvasRectF = CmdHelper.INSTANCE.toCanvasRectF(strokeObjectListB)
+
+        then:
+        strokeObjectListA.size() == strokeObjectListB.size()
+        canvasRectF.left == -651.21277f
+        canvasRectF.top == -541.86035f
+        canvasRectF.right == 296.5984f
+        canvasRectF.bottom == 207.61145f
     }
 }
