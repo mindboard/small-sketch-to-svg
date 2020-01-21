@@ -6,6 +6,7 @@ import java.util.zip.GZIPInputStream
 import org.json.*
 
 import com.mindboardapps.app.smallsketch.tosvg.svg.*
+import com.mindboardapps.app.smallsketch.tosvg.model.IStrokeObject
 import com.mindboardapps.app.smallsketch.tosvg.style.*
 import com.mindboardapps.app.smallsketch.tosvg.utils.Matrix
 import com.mindboardapps.app.smallsketch.tosvg.utils.MatrixUtils
@@ -17,8 +18,7 @@ class SsfToSvg(private val styleObject: IStyleObject) {
 
     val strokeWidth = styleObject.strokeWidth
 
-    fun createSvg(lines: List<String>): String {
-        val strokeObjectList = CmdHelper.toStrokeObjectList(lines)
+    fun createSvg(strokeObjectList: List<IStrokeObject>): String {
         val canvasRectF = CmdHelper.toCanvasRectF(strokeObjectList)
 
         val minLeft = canvasRectF.left

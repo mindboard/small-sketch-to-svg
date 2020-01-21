@@ -18,23 +18,24 @@ fun main(args : Array<String>) {
     val styleObject  = if( !cl.hasOption("-s") ){ DefaultStyleObject() } else { StyleObject(File( cl.getOptionValue("s")!!)) }
 
     val lines = GZIPInputStream(System.`in`).bufferedReader(Charsets.UTF_8).use { it.readLines() }
+    val strokeObjectList = CmdHelper.toStrokeObjectList(lines)
 
     if( outputFormat=="svg" ){
-        print( SsfToSvg(styleObject).createSvg(lines) )
+        print( SsfToSvg(styleObject).createSvg(strokeObjectList) )
     }
     if( outputFormat=="pdf" ){
         val outputStream = BufferedOutputStream(System.out)
-        SsfToPdf(styleObject).createImage(lines, outputStream)
+        SsfToPdf(styleObject).createImage(strokeObjectList, outputStream)
         outputStream.close()
     }
     if( outputFormat=="png" ){
         val outputStream = BufferedOutputStream(System.out)
-        SsfToPng(styleObject).createImage(lines, outputStream)
+        SsfToPng(styleObject).createImage(strokeObjectList, outputStream)
         outputStream.close()
     }
     if( listOf("jpg","jpeg").contains(outputFormat) ){
         val outputStream = BufferedOutputStream(System.out)
-        SsfToJpeg(styleObject).createImage(lines, outputStream)
+        SsfToJpeg(styleObject).createImage(strokeObjectList, outputStream)
         outputStream.close()
     }
 }

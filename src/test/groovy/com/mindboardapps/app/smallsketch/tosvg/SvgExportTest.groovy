@@ -12,7 +12,7 @@ class SvgExportTest extends Specification {
         File svgFile){
 
         def lines = new GZIPInputStream(new FileInputStream(ssfFile)).readLines()
-        svgFile.text = new SsfToSvg( new StyleObject( styleJsonFile ) ).createSvg(lines)
+        svgFile.text = new SsfToSvg( new StyleObject( styleJsonFile ) ).createSvg(CmdHelper.INSTANCE.toStrokeObjectList(lines))
     }
 
     //@Ignore

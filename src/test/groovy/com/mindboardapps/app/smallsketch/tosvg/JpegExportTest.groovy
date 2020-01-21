@@ -13,7 +13,9 @@ class JpegExportTest extends Specification {
 
         def lines = new GZIPInputStream(new FileInputStream(ssfFile)).readLines()
         def outputStream = new FileOutputStream(jpegFile)
-        new SsfToJpeg( new StyleObject( styleJsonFile ) ).createImage(lines, outputStream)
+        new SsfToJpeg( new StyleObject( styleJsonFile ) ).createImage(
+            CmdHelper.INSTANCE.toStrokeObjectList(lines),
+            outputStream)
         outputStream.close()
     }
 

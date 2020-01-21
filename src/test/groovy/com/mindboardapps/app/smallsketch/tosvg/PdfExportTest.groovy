@@ -13,7 +13,9 @@ class PdfExportTest extends Specification {
 
         def lines = new GZIPInputStream(new FileInputStream(ssfFile)).readLines()
         def outputStream = new FileOutputStream(pdfFile)
-        new SsfToPdf( new StyleObject( styleJsonFile ) ).createImage(lines, outputStream)
+        new SsfToPdf( new StyleObject( styleJsonFile ) ).createImage(
+            CmdHelper.INSTANCE.toStrokeObjectList(lines),
+            outputStream)
         outputStream.close()
     }
 

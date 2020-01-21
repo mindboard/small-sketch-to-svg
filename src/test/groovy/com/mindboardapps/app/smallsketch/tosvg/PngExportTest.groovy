@@ -13,7 +13,9 @@ class PngExportTest extends Specification {
 
         def lines = new GZIPInputStream(new FileInputStream(ssfFile)).readLines()
         def outputStream = new FileOutputStream(pngFile)
-        new SsfToPng( new StyleObject( styleJsonFile ) ).createImage(lines, outputStream)
+        new SsfToPng( new StyleObject( styleJsonFile ) ).createImage(
+            CmdHelper.INSTANCE.toStrokeObjectList(lines),
+            outputStream)
         outputStream.close()
     }
 

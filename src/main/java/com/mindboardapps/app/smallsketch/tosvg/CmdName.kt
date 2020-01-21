@@ -4,5 +4,5 @@ enum class CmdName {
     ADD_STROKE,
     DELETE_STROKES,
     MOVE_STROKES,
-	RESIZE_GROUP
+    RESIZE_GROUP
 }
