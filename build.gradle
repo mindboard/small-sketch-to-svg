@@ -1,18 +1,15 @@
 buildscript {
-    //ext.kotlin_version = '1.3.11'
-    ext.kotlin_version = '1.3.40'
-
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.61"
     }
 }
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.3.11"
+    id "org.jetbrains.kotlin.jvm" version "1.3.61"
 }
 
 apply plugin: 'kotlin'
@@ -50,7 +47,7 @@ publishing {
     publications {
         maven(MavenPublication) {
             groupId 'com.mindboardapps.app.smallsketch'
-            artifactId 'to-img'
+            artifactId 'tosvg'
             version '0.1.0-SNAPSHOT'
 
             from components.java
