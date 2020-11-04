@@ -14,7 +14,8 @@ class DefaultStyleObject : IStyleObject{
     override var backgroundColor: Color = StyleObjectRes.WHITE
 
     override var strokeWidth: Float = 1.0f
-    override var strokeColor: Color = StyleObjectRes.BLACK
+    override var strokeColor: Color? = null
+    override var strokeColorList: List<Color>? = null
     override var canvasWidth: Int? = null
 
     override fun enabledCanvasWidth(): Boolean = false

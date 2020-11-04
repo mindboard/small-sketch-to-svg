@@ -12,7 +12,8 @@ interface IStyleObject {
     var backgroundColor: Color
 
     var strokeWidth: Float
-    var strokeColor: Color
+    var strokeColor: Color?
+    var strokeColorList: List<Color>?
     var canvasWidth: Int?
 
      fun enabledCanvasWidth(): Boolean

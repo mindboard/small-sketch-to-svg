@@ -2,23 +2,25 @@ package com.mindboardapps.app.smallsketch.tosvg.svg
 
 import com.mindboardapps.app.smallsketch.tosvg.style.*
 import com.mindboardapps.app.smallsketch.tosvg.utils.*
+import com.mindboardapps.app.smallsketch.tosvg.model.Color
 
 class SvgSmoothLine(
     private val styleObject: IStyleObject,
+    private val strokeColorAsIndex: Int,
     private val pointList: List<Point>) : ISvgPart {
 
     private val strokeWidth = styleObject.strokeWidth
-    private val strokeColor = SvgRes.createRgbColor( styleObject.strokeColor )
+    private val strokeColor = SvgRes.createRgbColor(StrokeColorResolver.resolve(styleObject, strokeColorAsIndex))
 
     override fun toSvg(): String {
         if( pointList.size<2 ){
             return ""
         }
         else if( pointList.size==2 ){
-            return SvgLine( styleObject, pointList[0], pointList[1] ).toSvg() 
+            return SvgLine( styleObject, strokeColorAsIndex, pointList[0], pointList[1] ).toSvg() 
         }
         else if( pointList.size<8 ){
-            return SvgLine2( styleObject, pointList).toSvg()
+            return SvgLine2( styleObject, strokeColorAsIndex, pointList).toSvg()
         }
         else {
             val sb = StringBuilder()
@@ -43,12 +45,6 @@ class SvgSmoothLine(
                 val yc = (pt1Y + pt2Y) / 2f
 
                 sb.append("${pt1X} ${pt1Y} ${xc} ${yc} ")
-                /*
-                val state: TwoPointState = PointCheckUtils.valid(pt1X, pt1Y, xc, yc, 1.0f)
-                if( state!=TwoPointState.SAME ){ 
-                    sb.append("${pt1X} ${pt1Y} ${xc} ${yc} ")
-                }
-                */
             }
 
             val indexLast2  = pointList.size-2
@@ -61,12 +57,6 @@ class SvgSmoothLine(
             val pt2Y = pointList[indexLast1].y
 
             sb.append("${pt1X} ${pt1Y} ${pt2X} ${pt2Y}")
-            /*
-            val state: TwoPointState = PointCheckUtils.valid(pt1X, pt1Y, pt2X, pt2Y, 1.0f)
-            if( state!=TwoPointState.SAME ){
-                sb.append("${pt1X} ${pt1Y} ${pt2X} ${pt2Y}")
-            }
-            */
 
             sb.append("\" />")
             sb.append("</g>")

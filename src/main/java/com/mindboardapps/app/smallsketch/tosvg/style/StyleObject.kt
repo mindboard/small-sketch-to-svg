@@ -10,7 +10,8 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
     override var hasPadding: Boolean = false
     override var fillBackground: Boolean = false
     override var strokeWidth: Float = 1.0f
-    override var strokeColor: Color = StyleObjectRes.BLACK
+    override var strokeColor: Color? = null
+    override var strokeColorList: List<Color>? = null
     override var backgroundColor: Color = StyleObjectRes.WHITE
     override var canvasWidth: Int? = null
 
@@ -42,7 +43,30 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
             this.backgroundColor = StyleObjectRes.createColor( jsonObject.getJSONObject("backgroundColor"), StyleObjectRes.WHITE )
 
             this.strokeWidth = jsonObject.getDouble("strokeWidth").toFloat()
-            this.strokeColor = StyleObjectRes.createColor( jsonObject.getJSONObject("strokeColor"), StyleObjectRes.BLACK )
+
+            try {
+                val strokeColorValue = jsonObject.getJSONObject("strokeColor")
+                this.strokeColor = StyleObjectRes.createColor(strokeColorValue, StyleObjectRes.BLACK )
+            }
+            catch( ex:JSONException ){
+                this.strokeColor = null
+            }
+
+            try {
+                val strokeColorArray = jsonObject.getJSONArray("strokeColorList")
+                this.strokeColorList = 0.until(6).map{ index->
+                    if( index<strokeColorArray.length()){
+                        val strokeColorValue = strokeColorArray.getJSONObject(index)
+                        StyleObjectRes.createColor(strokeColorValue, StyleObjectRes.BLACK )
+                    }
+                    else {
+                        StyleObjectRes.BLACK
+                    }
+                }
+            }
+            catch( ex:JSONException ){
+                this.strokeColorList = null
+            }
 
             this.canvasWidth = jsonObject.getInt("canvasWidth")
         }

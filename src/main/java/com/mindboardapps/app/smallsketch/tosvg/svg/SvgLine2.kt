@@ -4,17 +4,21 @@ import com.mindboardapps.app.smallsketch.tosvg.style.*
 
 class SvgLine2(
     private val styleObject: IStyleObject,
+    private val strokeColorAsIndex: Int,
     private val pointList: List<Point>) : ISvgPart {
 
     private val strokeWidth = styleObject.strokeWidth
-    private val strokeColor = SvgRes.createRgbColor( styleObject.strokeColor )
+    private val strokeColor = SvgRes.createRgbColor(StrokeColorResolver.resolve(styleObject, strokeColorAsIndex))
 
     override fun toSvg(): String {
         if( pointList.size<2 ){
             return ""
         }
         else if( pointList.size==2 ){
-            return SvgLine( styleObject, pointList[0], pointList[1] ).toSvg() 
+            return SvgLine(
+                styleObject,
+                strokeColorAsIndex,
+                pointList[0], pointList[1] ).toSvg() 
         }
         else {
             val sb = StringBuilder()
