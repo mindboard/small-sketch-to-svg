@@ -16,13 +16,28 @@ class SvgExportTest extends Specification {
     }
 
     //@Ignore
+    def "export-as-svg-test spin-13"(){
+        when:
+        def styleJsonFile = new File('./examples/style.json')
+        def svgFile = new File('spin-13.svg')
+
+        toSvg(
+            styleJsonFile,
+            new File('./examples/spin-13.ssf'),
+            svgFile)
+
+        then:
+        svgFile.exists()
+    }
+
+    //@Ignore
     def "export-as-svg-test-3"(){
         when:
         def styleJsonFile = new File('./examples/style-without-strokecolor.json')
         def svgFile = new File('iphone-se.svg')
 
         toSvg(
-            styleJsonFile, 
+            styleJsonFile,
             new File('./examples/iphone-se.ssf'),
             svgFile)
 
@@ -37,7 +52,7 @@ class SvgExportTest extends Specification {
         def svgFile = new File('nuc.svg')
 
         toSvg(
-            styleJsonFile, 
+            styleJsonFile,
             new File('./examples/nuc.ssf'),
             svgFile)
 
@@ -52,7 +67,7 @@ class SvgExportTest extends Specification {
         def svgFile = new File('tree.svg')
 
         toSvg(
-            styleJsonFile, 
+            styleJsonFile,
             new File('./examples/tree.ssf'),
             svgFile)
 

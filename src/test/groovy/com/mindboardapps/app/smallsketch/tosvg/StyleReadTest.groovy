@@ -19,6 +19,7 @@ class StyleReadTest extends Specification {
         styleObject.backgroundColor.b == 227
         styleObject.borderWidth == 1.2f
         styleObject.strokeWidth == 3.2f
+        styleObject.strokeColor != null
         styleObject.strokeColorList != null
         styleObject.strokeColorList?.size == 6
     }
