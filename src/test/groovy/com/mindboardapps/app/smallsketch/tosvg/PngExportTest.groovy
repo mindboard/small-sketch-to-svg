@@ -20,6 +20,36 @@ class PngExportTest extends Specification {
     }
 
     //@Ignore
+    def "export-as-png-test coelacanth another style"(){
+        when:
+        def styleJsonFile = new File('./examples/another-style.json')
+        def pngFile = new File('coelacanth_another_style.png')
+
+        toPng(
+            styleJsonFile,
+            new File('./examples/coelacanth.ssf'),
+            pngFile)
+
+        then:
+        pngFile.exists()
+    }
+
+    //@Ignore
+    def "export-as-png-test coelacanth"(){
+        when:
+        def styleJsonFile = new File('./examples/style.json')
+        def pngFile = new File('coelacanth.png')
+
+        toPng(
+            styleJsonFile,
+            new File('./examples/coelacanth.ssf'),
+            pngFile)
+
+        then:
+        pngFile.exists()
+    }
+
+    //@Ignore
     def "export-as-png-test-2"(){
         when:
         def styleJsonFile = new File('./examples/style.json')

@@ -51,17 +51,11 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
 
             this.strokeWidth = jsonObject.getDouble("strokeWidth").toFloat()
 
-            try {
-                val strokeColorValue = jsonObject.getJSONObject("strokeColor")
-                this.strokeColor = StyleObjectRes.createColor(strokeColorValue, StyleObjectRes.BLACK )
-            }
-            catch( ex:JSONException ){
-                this.strokeColor = null
-            }
 
             try {
                 val strokeColorArray = jsonObject.getJSONArray("strokeColorList")
-                this.strokeColorList = 0.until(6).map{ index->
+
+                val strokeColorList = 0.until(6).map{ index->
                     if( index<strokeColorArray.length()){
                         val strokeColorValue = strokeColorArray.getJSONObject(index)
                         StyleObjectRes.createColor(strokeColorValue, StyleObjectRes.BLACK )
@@ -70,9 +64,24 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
                         StyleObjectRes.BLACK
                     }
                 }
+
+                this.strokeColorList = strokeColorList
+
+                if( strokeColorList.size>0 ){
+                    this.strokeColor = strokeColorList[0]
+                }
+                else {
+                    this.strokeColor = StyleObjectRes.BLACK
+                }
             }
             catch( ex:JSONException ){
-                this.strokeColorList = null
+                try {
+                    val strokeColorValue = jsonObject.getJSONObject("strokeColor")
+                    this.strokeColor = StyleObjectRes.createColor(strokeColorValue, StyleObjectRes.BLACK )
+                }
+                catch( ex:JSONException ){
+                    this.strokeColorList = StyleObjectRes.DEFAULT_STROKE_COLOR_LIST
+                }
             }
 
             this.canvasWidth = jsonObject.getInt("canvasWidth")
