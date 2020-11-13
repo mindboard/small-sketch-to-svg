@@ -1,9 +1,10 @@
 {
 	"border": true,
-	"hasPadding": true,
+	"padding": true,
 	"fillBackground": true,
+	"borderWidth" : 1.2,
 	"borderColor": {"R":27, "G":95, "B":133 },
-	"strokeWidth" : 1.2,
+	"strokeWidth" : 3.2,
 	"strokeColorList" : [
 		{"R":76,  "G":96,  "B":130 },
 		{"R":232, "G":83,  "B":33  },

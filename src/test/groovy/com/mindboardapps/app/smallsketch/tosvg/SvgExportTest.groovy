@@ -19,11 +19,11 @@ class SvgExportTest extends Specification {
     def "export-as-svg-test-3"(){
         when:
         def styleJsonFile = new File('./examples/style-without-strokecolor.json')
-        def svgFile = new File('color.svg')
+        def svgFile = new File('iphone-se.svg')
 
         toSvg(
             styleJsonFile, 
-            new File('./examples/color.ssf'),
+            new File('./examples/iphone-se.ssf'),
             svgFile)
 
         then:

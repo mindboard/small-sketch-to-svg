@@ -5,8 +5,9 @@ import com.mindboardapps.app.smallsketch.tosvg.model.Color
 interface IStyleObject {
     var border: Boolean
     var borderColor: Color
+    var borderWidth: Float
 
-    var hasPadding: Boolean
+    var padding: Boolean
 
     var fillBackground: Boolean
     var backgroundColor: Color

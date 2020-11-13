@@ -13,11 +13,12 @@ class StyleReadTest extends Specification {
 
         then:
         styleJsonFile.exists()
-        styleObject.hasPadding == true
-        styleObject.strokeWidth == 1.2f
+        styleObject.padding == true
         styleObject.backgroundColor.r == 253
         styleObject.backgroundColor.g == 246
         styleObject.backgroundColor.b == 227
+        styleObject.borderWidth == 1.2f
+        styleObject.strokeWidth == 3.2f
         styleObject.strokeColorList != null
         styleObject.strokeColorList?.size == 6
     }

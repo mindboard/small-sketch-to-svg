@@ -30,7 +30,7 @@ A command line tool to convert SSF(small-sketch-format) into SVG, PDF, PNG, JPEG
 7. Convert ssf to jpg with style  
     `cat foo.ssf | /path/to/ssf2img/bin/ssf2img -f jpg -s style.json > foo.jpg`
 
-There is an example file example1.ssf in the ./resources dir and a style.json example in the ./examples dir.
+There are some example ssf files and style json files in the ./examples.
 
 ![Example1](https://github.com/mindboard/ssf2img/blob/master/resources/example1.svg)
 

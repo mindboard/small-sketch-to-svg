@@ -7,7 +7,8 @@ import com.mindboardapps.app.smallsketch.tosvg.model.Color
 class StyleObject(styleJsonFile: File) : IStyleObject{
     override var border: Boolean = false
     override var borderColor: Color = StyleObjectRes.BLACK
-    override var hasPadding: Boolean = false
+    override var borderWidth: Float = 1.0f
+    override var padding: Boolean = false
     override var fillBackground: Boolean = false
     override var strokeWidth: Float = 1.0f
     override var strokeColor: Color? = null
@@ -24,13 +25,19 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
             val jsonObject = JSONObject(styleJsonText)
 
             this.border = jsonObject.getBoolean("border")
+            this.borderWidth = jsonObject.getDouble("borderWidth").toFloat()
             this.borderColor = StyleObjectRes.createColor( jsonObject.getJSONObject("borderColor"), StyleObjectRes.BLACK )
 
             try {
-                this.hasPadding = jsonObject.getBoolean("hasPadding")
+                this.padding = jsonObject.getBoolean("padding")
             }
             catch( ex:JSONException ){
-                this.hasPadding = false
+                try {
+                    this.padding = jsonObject.getBoolean("hasPadding")
+                }
+                catch( ex:JSONException ){
+                    this.padding = false
+                }
             }
 
             try {

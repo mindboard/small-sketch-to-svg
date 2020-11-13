@@ -51,7 +51,7 @@ class SsfToSvg(private val styleObject: IStyleObject) {
             0f, 1f, (0f - minTop)  - canvasHeight/2f,
             0f, 0f, 1f)
 
-        var paddingFactor = if( styleObject.hasPadding ){ DEFAULT_PADDING_FACTOR } else { 1f }
+        var paddingFactor = if( styleObject.padding ){ DEFAULT_PADDING_FACTOR } else { 1f }
         val scaleMatrixValues = floatArrayOf(
             scale * paddingFactor , 0f, 0f,
             0f, scale * paddingFactor, 0f,
