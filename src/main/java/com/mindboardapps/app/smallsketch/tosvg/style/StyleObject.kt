@@ -25,7 +25,14 @@ class StyleObject(styleJsonFile: File) : IStyleObject{
             val jsonObject = JSONObject(styleJsonText)
 
             this.border = jsonObject.getBoolean("border")
-            this.borderWidth = jsonObject.getDouble("borderWidth").toFloat()
+
+            try {
+                this.borderWidth = jsonObject.getDouble("borderWidth").toFloat()
+            }
+            catch( ex:JSONException ){
+                this.borderWidth = 1f
+            }
+
             this.borderColor = StyleObjectRes.createColor( jsonObject.getJSONObject("borderColor"), StyleObjectRes.BLACK )
 
             try {
